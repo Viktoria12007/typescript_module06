@@ -16,11 +16,7 @@ type Expected = {
     readonly y: string,
 }
 
-export type DeepReadonly<T> = {
-    readonly [P in keyof T] : (keyof T[P]) extends Object ?
-        DeepReadonly<T[P]> :
-        T[P];
-}
+export type DeepReadonly<T> = {}
 
 type Todo = DeepReadonly<X> // should be same as `Expected`
 
