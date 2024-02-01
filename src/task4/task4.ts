@@ -11,12 +11,12 @@ type Expected = {
     readonly x: {
         readonly a: 1
         readonly b: 'hi'
-        z: string,
+        readonly z: string,
     }
     readonly y: string,
 }
 
-export type DeepReadonly<T> = {}
+export type DeepReadonly<T> = Readonly<Record<keyof T, Readonly<T[keyof T]>>>
 
 type Todo = DeepReadonly<X> // should be same as `Expected`
 
@@ -30,5 +30,5 @@ const test: Todo = {
 };
 
 // comment lines below when running tests
-// test.y = 'changed'; // Error
-// test.x.z = 'changed'; // Error
+test.y = 'changed'; // Error
+test.x.z = 'changed'; // Error

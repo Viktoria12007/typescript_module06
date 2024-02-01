@@ -4,7 +4,7 @@ type Todo = {
     completed: boolean
 };
 
-export type MyReadonly;
+export type MyReadonly<T, K> = Readonly<Pick<T, K>> & Omit<T, K>;
 
 const todo: MyReadonly<Todo, 'title' | 'description'> = {
     title: "Hey",
